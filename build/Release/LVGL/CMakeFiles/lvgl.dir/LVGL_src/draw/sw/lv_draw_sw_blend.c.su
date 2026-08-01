@@ -1,0 +1,6 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/../../misc/lv_color.h:438:48:lv_color_mix	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw_blend.c:950:26:color_blend_true_color_additive	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw_blend.c:1003:26:color_blend_true_color_subtractive	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw_blend.c:1029:26:color_blend_true_color_multiply	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw_blend.c:95:6:lv_draw_sw_blend	24	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw_blend.c:108:28:lv_draw_sw_blend_basic	104	static

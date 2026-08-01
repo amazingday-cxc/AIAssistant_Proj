@@ -1,0 +1,4 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/list/lv_list.c:56:12:lv_list_create	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/list/lv_list.c:65:12:lv_list_add_text	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/list/lv_list.c:76:12:lv_list_add_btn	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/list/lv_list.c:101:14:lv_list_get_btn_text	16	static

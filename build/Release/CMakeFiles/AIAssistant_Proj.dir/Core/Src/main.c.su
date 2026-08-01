@@ -1,0 +1,4 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/main.c:132:6:SystemClock_Config	88	static,ignoring_inline_asm
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/main.c:70:5:main	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/main.c:186:6:HAL_TIM_PeriodElapsedCallback	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/main.c:204:6:Error_Handler	0	static,ignoring_inline_asm

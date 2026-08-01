@@ -1,0 +1,7 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:110:13:lv_animimg_constructor	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:128:13:index_change	4	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:59:12:lv_animimg_create	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:67:6:lv_animimg_set_src	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:76:6:lv_animimg_start	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:87:6:lv_animimg_set_duration	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/animimg/lv_animimg.c:95:6:lv_animimg_set_repeat_count	0	static

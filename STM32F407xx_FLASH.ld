@@ -58,6 +58,7 @@ MEMORY
 RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 128K
 CCMRAM (xrw)      : ORIGIN = 0x10000000, LENGTH = 64K
 FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 1024K
+EXTSRAM (xrw)  : ORIGIN = 0x68000000, LENGTH = 1024K
 }
 
 /* Highest address of the user mode stack */
@@ -257,7 +258,16 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-
+  /* External SRAM section (IS62WV51216, 1MB, Bank3 NE3) */
+  .ext_sram (NOLOAD) :
+  {
+    . = ALIGN(4);
+    _sext_sram = .;
+    *(.ext_sram)
+    *(.ext_sram*)
+    . = ALIGN(4);
+    _eext_sram = .;
+  } >EXTSRAM
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

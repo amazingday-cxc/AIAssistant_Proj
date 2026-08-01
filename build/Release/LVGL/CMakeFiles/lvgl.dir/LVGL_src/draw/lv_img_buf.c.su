@@ -1,0 +1,10 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/../misc/lv_mem.h:193:44:lv_memcpy_small.isra	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:41:12:lv_img_buf_get_px_color	32	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:100:10:lv_img_buf_get_px_alpha	40	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:155:6:lv_img_buf_set_px_alpha	24	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:206:6:lv_img_buf_set_px_color	32	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:265:6:lv_img_buf_set_palette	32	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:311:6:lv_img_buf_free	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:321:10:lv_img_buf_get_img_size	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:279:16:lv_img_buf_alloc	24	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_img_buf.c:352:6:_lv_img_buf_get_transformed_area	40	static

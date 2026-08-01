@@ -1,0 +1,4 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_draw_label.c:379:16:hex_char_to_num	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_draw_label.c:55:28:lv_draw_label_dsc_init	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_draw_label.c:364:6:lv_draw_letter	4	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/lv_draw_label.c:77:28:lv_draw_label	248	static

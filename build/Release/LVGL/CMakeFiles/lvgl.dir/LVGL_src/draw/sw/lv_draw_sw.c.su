@@ -1,0 +1,4 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw.c:75:6:lv_draw_sw_wait_for_finish	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw.c:81:6:lv_draw_sw_buffer_copy	32	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw.c:40:6:lv_draw_sw_init_ctx	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/draw/sw/lv_draw_sw.c:67:6:lv_draw_sw_deinit_ctx	0	static

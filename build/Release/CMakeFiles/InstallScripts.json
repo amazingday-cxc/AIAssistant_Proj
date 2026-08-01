@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/cmake_install.cmake",
+		"/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/cmake/stm32cubemx/cmake_install.cmake",
+		"/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/LVGL/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

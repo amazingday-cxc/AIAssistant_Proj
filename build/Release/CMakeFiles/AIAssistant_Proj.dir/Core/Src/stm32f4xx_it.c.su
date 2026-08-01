@@ -1,0 +1,8 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:72:6:NMI_Handler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:87:6:HardFault_Handler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:102:6:MemManage_Handler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:117:6:BusFault_Handler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:132:6:UsageFault_Handler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:147:6:DebugMon_Handler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:167:6:TIM6_DAC_IRQHandler	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/Core/Src/stm32f4xx_it.c:181:6:DMA2_Stream0_IRQHandler	0	static

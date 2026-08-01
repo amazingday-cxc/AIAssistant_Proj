@@ -1,0 +1,4 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/basic/lv_theme_basic.c:169:13:theme_apply	24	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/basic/lv_theme_basic.c:414:13:style_init_reset	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/basic/lv_theme_basic.c:135:6:lv_theme_basic_is_inited	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/basic/lv_theme_basic.c:140:14:lv_theme_basic_init	24	static

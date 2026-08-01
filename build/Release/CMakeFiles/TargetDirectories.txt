@@ -1,0 +1,10 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/CMakeFiles/AIAssistant_Proj.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/CMakeFiles/edit_cache.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/CMakeFiles/rebuild_cache.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/cmake/stm32cubemx/CMakeFiles/FreeRTOS.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/LVGL/CMakeFiles/lvgl.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/LVGL/CMakeFiles/edit_cache.dir
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/build/Release/LVGL/CMakeFiles/rebuild_cache.dir

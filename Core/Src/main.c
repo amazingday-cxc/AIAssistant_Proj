@@ -19,11 +19,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "dma.h"
 #include "gpio.h"
+#include "fsmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "bsp_nt35510.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +46,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+volatile BSP_NT35510_Status lcd_init_status;
+volatile bool lcd_test_ready;
+volatile uint16_t lcd_test_id;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -83,13 +87,22 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  // HAL_DMA_Start(&hdma_memtomem_dma2_stream0, )
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_FSMC_Init();
   /* USER CODE BEGIN 2 */
-
+  lcd_init_status = BSP_NT35510_Init();
+  lcd_test_id = BSP_NT35510_GetDeviceId();
+  lcd_test_ready = BSP_NT35510_IsReady();
+  // if (lcd_test_ready)
+  // {
+  //   BSP_NT35510_DrawLine(0, 0, 440, 700, BSP_NT35510_COLOR_BLUE);
+  // }
   /* USER CODE END 2 */
 
   /* Init scheduler */

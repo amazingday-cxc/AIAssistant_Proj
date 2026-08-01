@@ -1,0 +1,7 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/../../../../LVGL_src/hal/../draw/../misc/lv_color.h:695:26:lv_color_white	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/../../../../LVGL_src/hal/../draw/../misc/lv_color.h:699:26:lv_color_black	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/lv_theme_mono.c:197:13:theme_apply	24	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/../../../../LVGL_src/hal/../draw/../misc/lv_style.h:529:20:lv_style_set_pad_all	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/lv_theme_mono.c:491:13:style_init_reset	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/lv_theme_mono.c:165:6:lv_theme_mono_is_inited	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/themes/mono/lv_theme_mono.c:170:14:lv_theme_mono_init	32	static

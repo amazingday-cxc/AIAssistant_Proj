@@ -1,0 +1,4 @@
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/spinner/lv_spinner.c:65:13:lv_spinner_constructor	88	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/spinner/lv_spinner.c:91:13:arc_anim_start_angle	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/spinner/lv_spinner.c:96:13:arc_anim_end_angle	0	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_src/extra/widgets/spinner/lv_spinner.c:51:12:lv_spinner_create	8	static
