@@ -12,10 +12,6 @@
 #include "lv_port_disp.h"
 #include "bsp_nt35510.h"
 #include <stdbool.h>
-
-#include "dma.h"
-extern DMA_HandleTypeDef hdma_memtomem_dma2_stream0;
-
 /*********************
  *      DEFINES
  *********************/
@@ -44,11 +40,10 @@ static void disp_init(void);
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p);
 //static void gpu_fill(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, lv_coord_t dest_width,
 //        const lv_area_t * fill_area, lv_color_t color);
-static void disp_dma_complete(DMA_HandleTypeDef *hdma);
 /**********************
  *  STATIC VARIABLES
  **********************/
-static lv_disp_drv_t *s_disp_drv_ptr = NULL;
+
 /**********************
  *      MACROS
  **********************/
@@ -96,8 +91,15 @@ void lv_port_disp_init(void)
 
     // /* Example for 2) */
     static lv_disp_draw_buf_t draw_buf_dsc_2;
-    static lv_color_t buf_2_1[MY_DISP_HOR_RES * 10];                        /*A buffer for 10 rows*/
-    static lv_color_t buf_2_2[MY_DISP_HOR_RES * 10];                        /*An other buffer for 10 rows*/
+    /* Place both draw buffers in CCMRAM (64 KB, 0x10000000).
+     * Each buffer is MY_DISP_HOR_RES * 10 * sizeof(lv_color_t) = 800*10*2 = 16 000 B (~15.6 KB).
+     * Two buffers together use ~31.2 KB, well within the 64 KB CCMRAM.
+     *
+     * NOTE: STM32F4 DMA controllers cannot access CCMRAM (it is on the
+     * D-code bus only).  If DMA-based flushing is added later, move these
+     * buffers back to internal SRAM or external SRAM instead. */
+    static lv_color_t buf_2_1[MY_DISP_HOR_RES * 10] __attribute__((section(".ccmram")));
+    static lv_color_t buf_2_2[MY_DISP_HOR_RES * 10] __attribute__((section(".ccmram")));
     lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2, MY_DISP_HOR_RES * 10);   /*Initialize the display buffer*/
 
     // /* Example for 3) also set disp_drv.full_refresh = 1 below*/
@@ -136,8 +138,6 @@ void lv_port_disp_init(void)
 
     /*Finally register the driver*/
     lv_disp_drv_register(&disp_drv);
-    HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream0,HAL_DMA_XFER_CPLT_CB_ID,
-                              disp_dma_complete);
 }
 
 /**********************
@@ -172,22 +172,21 @@ void disp_disable_update(void)
  *'lv_disp_flush_ready()' has to be called when finished.*/
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
-    s_disp_drv_ptr = disp_drv;
     if(disp_flush_enabled) {
         /* LV_COLOR_DEPTH is 16 (RGB565) in lv_conf.h, so lv_color_t maps 1:1
          * onto the uint16_t pixels the NT35510 expects. Push the whole area in
          * one windowed block write instead of pixel-by-pixel. */
         const int32_t width  = area->x2 - area->x1 + 1;
         const int32_t height = area->y2 - area->y1 + 1;
-        BSP_NT35510_PreparePixelWrite((uint16_t)area->x1, (uint16_t)area->y1, width, height);
-        HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0,
-                         (uint32_t)color_p,
-                         BSP_NT35510_DATA_REG,
-                         (uint32_t)width * height);
+
+        BSP_NT35510_WritePixels((uint16_t)area->x1, (uint16_t)area->y1,
+                                (uint16_t)width,    (uint16_t)height,
+                                (const uint16_t *)color_p);
     }
-    else {
-        lv_disp_flush_ready(disp_drv); // 禁用时直接返回
-    }
+
+    /* LVGL must always be notified when flushing is done, regardless of
+     * whether the screen was actually updated. */
+    lv_disp_flush_ready(disp_drv);
 }
 
 /*OPTIONAL: GPU INTERFACE*/
@@ -207,11 +206,6 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 //        dest_buf+=dest_width;    /*Go to the next line*/
 //    }
 //}
-static void disp_dma_complete(DMA_HandleTypeDef *hdma)
-{
-    (void)hdma;
-    lv_disp_flush_ready(s_disp_drv_ptr);
-}
 #else /*Enable this file at the top*/
 
 /*This dummy typedef exists purely to silence -Wpedantic.*/

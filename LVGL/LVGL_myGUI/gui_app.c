@@ -27,23 +27,89 @@
  *  DEMO SCREEN
  *=========================*/
 
-static void gui_build_demo(void)
+/* Apply a consistent drop-shadow to a button object. */
+static void apply_btn_shadow(lv_obj_t *btn)
+{
+    lv_obj_set_style_shadow_width(btn,  20,                  0);
+    lv_obj_set_style_shadow_spread(btn,  3,                  0);
+    lv_obj_set_style_shadow_ofs_x(btn,   5,                  0);
+    lv_obj_set_style_shadow_ofs_y(btn,   8,                  0);
+    lv_obj_set_style_shadow_color(btn,  lv_color_hex(0x000000), 0);
+    lv_obj_set_style_shadow_opa(btn,    LV_OPA_50,           0);
+}
+
+static void gui_main_menu(void)
 {
     lv_obj_t *scr = lv_scr_act();
 
+    /* ── Background: ink blue (墨蓝) ── */
+    lv_obj_set_style_bg_color(scr, lv_color_hex(0x1A2B4A), 0);
+    lv_obj_set_style_bg_opa(scr, LV_OPA_COVER, 0);
+
+
     lv_obj_t *label = lv_label_create(scr);
-    lv_label_set_text(label, "LVGL on STM32F407\nAIAssistant_Proj");
+    lv_label_set_text(label, "LVGL+MQTT Demo ");
     lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, -20);
+    lv_obj_set_style_text_color(label, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_36, 0);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, -200);
 
-    /* A button to prove widgets + theme are alive. */
-    lv_obj_t *btn = lv_btn_create(scr);
-    lv_obj_set_size(btn, 140, 44);
-    lv_obj_align(btn, LV_ALIGN_CENTER, 0, 40);
 
-    lv_obj_t *btn_label = lv_label_create(btn);
-    lv_label_set_text(btn_label, "Ready");
-    lv_obj_center(btn_label);
+    /* ── Three buttons with drop-shadow ── */
+    lv_obj_t *btn_volumn = lv_btn_create(scr);
+    lv_obj_set_size(btn_volumn, 280, 160);
+    lv_obj_set_style_bg_color(btn_volumn, lv_color_hex(0x5CE7AF), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_align(btn_volumn, LV_ALIGN_CENTER, -160, 120);
+    apply_btn_shadow(btn_volumn);
+
+    lv_obj_t *btn_LED = lv_btn_create(scr);
+    lv_obj_set_size(btn_LED, 280, 160);
+    lv_obj_set_style_bg_color(btn_LED, lv_color_hex(0xE7C15C), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_align(btn_LED, LV_ALIGN_CENTER, -160, -80);
+    apply_btn_shadow(btn_LED);
+
+    lv_obj_t *btn_battery = lv_btn_create(scr);
+    lv_obj_set_size(btn_battery, 280, 360);
+    lv_obj_set_style_bg_color(btn_battery, lv_color_hex(0xC25CE7), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_align(btn_battery, LV_ALIGN_CENTER, 160, 20);
+    apply_btn_shadow(btn_battery);
+
+
+    lv_obj_t *volumn_logo = lv_label_create(btn_volumn);
+    lv_label_set_text(volumn_logo, LV_SYMBOL_AUDIO);
+    lv_obj_set_style_text_color(volumn_logo, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(volumn_logo, &lv_font_montserrat_48, 0);
+    lv_obj_align(volumn_logo, LV_ALIGN_CENTER, 0, -20);
+
+    lv_obj_t *battery_logo = lv_label_create(btn_battery);
+    lv_label_set_text(battery_logo, LV_SYMBOL_BATTERY_FULL);
+    lv_obj_set_style_text_color(battery_logo, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(battery_logo, &lv_font_montserrat_48, 0);
+    lv_obj_align(battery_logo, LV_ALIGN_CENTER, 0, -20);
+
+    lv_obj_t *LED_logo = lv_label_create(btn_LED);
+    lv_label_set_text(LED_logo, LV_SYMBOL_CHARGE);
+    lv_obj_set_style_text_color(LED_logo, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(LED_logo, &lv_font_montserrat_48, 0);
+    lv_obj_align(LED_logo, LV_ALIGN_CENTER, 0, -20);
+
+    lv_obj_t *btn_battery_label = lv_label_create(btn_battery);
+    lv_label_set_text(btn_battery_label, "BATTERY");
+    lv_obj_set_style_text_color(btn_battery_label, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(btn_battery_label, &lv_font_montserrat_24, 0);
+    lv_obj_align(btn_battery_label, LV_ALIGN_CENTER, 0, 30);
+
+    lv_obj_t *btn_volumn_label = lv_label_create(btn_volumn);
+    lv_label_set_text(btn_volumn_label, "VOLUMN");
+    lv_obj_set_style_text_color(btn_volumn_label, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(btn_volumn_label, &lv_font_montserrat_24, 0);
+    lv_obj_align(btn_volumn_label, LV_ALIGN_CENTER, 0, 30);
+
+    lv_obj_t *btn_LED_label = lv_label_create(btn_LED);
+    lv_label_set_text(btn_LED_label, "LIGHT SWITCH");
+    lv_obj_set_style_text_color(btn_LED_label, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_set_style_text_font(btn_LED_label, &lv_font_montserrat_24, 0);
+    lv_obj_align(btn_LED_label, LV_ALIGN_CENTER, 0, 30);
 }
 
 /*=========================
@@ -56,7 +122,7 @@ void gui_app_init(void)
     lv_port_disp_init();
     /* lv_port_indev_init(); // enable once an input driver is available */
     BSP_NT35510_SetOrientation(1);
-    gui_build_demo();
+    gui_main_menu();
 }
 
 void guiTask_Func(void *argument)

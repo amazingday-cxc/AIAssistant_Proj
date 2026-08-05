@@ -154,11 +154,11 @@ void StartDefaultTask(void *argument)
 // void guiTask_Func(void *argument)
 // {
 //   /* USER CODE BEGIN guiTask_Func */
-//   /* Infinite loop */
-//   for(;;)
-//   {
-//     osDelay(1);
-//   }
+//     /* Infinite loop */
+//     for(;;)
+//     {
+//       osDelay(1);
+//     }
 //   /* USER CODE END guiTask_Func */
 // }
 

@@ -52,6 +52,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
         Firmware/src/bsp_nt35510.c
         Firmware/src/bsp_nt35510_font.c
         Firmware/inc/bsp_nt35510_font.h
+        Firmware/inc/bsp_gt1151.h
+        Firmware/src/bsp_gt1151.c
 )
 
 # Add include paths

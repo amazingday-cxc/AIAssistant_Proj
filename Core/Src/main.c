@@ -19,12 +19,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-#include "dma.h"
 #include "gpio.h"
 #include "fsmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "bsp_gt1151.h"
 #include "bsp_nt35510.h"
 /* USER CODE END Includes */
 
@@ -35,6 +35,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+/* GT1151 is mounted in portrait coordinates (480 x 800), while the LCD demo
+ * runs in landscape (800 x 480).  Change these values if the panel firmware
+ * reports a different coordinate range. */
+#define GT1151_RAW_WIDTH       480U
+#define GT1151_RAW_HEIGHT      800U
+#define GT1151_MARK_RADIUS       8U
 
 /* USER CODE END PD */
 
@@ -49,17 +56,125 @@
 volatile BSP_NT35510_Status lcd_init_status;
 volatile bool lcd_test_ready;
 volatile uint16_t lcd_test_id;
+volatile GT1151_Status gt1151_init_status;
+volatile GT1151_TouchData gt1151_touch_data;
+volatile uint32_t gt1151_frame_count;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
+static void GT1151_DemoDrawHeader(const char *id);
+static bool GT1151_MapToLandscape(const GT1151_Point *point,
+                                  uint16_t *screen_x, uint16_t *screen_y);
+static void GT1151_DemoDrawTouch(const GT1151_TouchData *touch);
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+static void GT1151_DemoDrawHeader(const char *id)
+{
+  uint16_t status_color;
+  const char *status_text;
+
+  if (gt1151_init_status == GT1151_OK)
+  {
+    status_color = BSP_NT35510_COLOR_GREEN;
+    status_text = "GT1151 READY";
+  }
+  else if (gt1151_init_status == GT1151_ID_MISMATCH)
+  {
+    status_color = BSP_NT35510_COLOR_YELLOW;
+    status_text = "GOODIX ID MISMATCH";
+  }
+  else
+  {
+    status_color = BSP_NT35510_COLOR_RED;
+    status_text = "GT1151 I2C ERROR";
+  }
+
+  BSP_NT35510_FillRect(0, 0, 800, 64, BSP_NT35510_COLOR_DARK_BLUE);
+  BSP_NT35510_DrawString(12, 8, 300, 24, status_text,
+                        BSP_NT35510_FONT_24, status_color,
+                        BSP_NT35510_COLOR_DARK_BLUE, false);
+  BSP_NT35510_DrawString(330, 8, 60, 24, "ID:",
+                        BSP_NT35510_FONT_24, BSP_NT35510_COLOR_WHITE,
+                        BSP_NT35510_COLOR_DARK_BLUE, false);
+  BSP_NT35510_DrawString(390, 8, 100, 24, id,
+                        BSP_NT35510_FONT_24, BSP_NT35510_COLOR_WHITE,
+                        BSP_NT35510_COLOR_DARK_BLUE, false);
+  BSP_NT35510_DrawString(12, 36, 700, 16,
+                        "Touch panel to draw; X/Y below are raw values",
+                        BSP_NT35510_FONT_16, BSP_NT35510_COLOR_WHITE,
+                        BSP_NT35510_COLOR_DARK_BLUE, false);
+}
+
+static bool GT1151_MapToLandscape(const GT1151_Point *point,
+                                  uint16_t *screen_x, uint16_t *screen_y)
+{
+  if ((point == NULL) || (screen_x == NULL) || (screen_y == NULL) ||
+      (point->x >= GT1151_RAW_WIDTH) ||
+      (point->y >= GT1151_RAW_HEIGHT))
+  {
+    return false;
+  }
+
+  /* The touch panel reports portrait coordinates (480 x 800).  The NT35510
+   * landscape setting uses MADCTL 0xA0 (MY + MV), therefore the matching
+   * clockwise transformation is: Xlcd = 799 - Ytouch, Ylcd = Xtouch. */
+  *screen_x = (uint16_t)((GT1151_RAW_HEIGHT - 1U) - point->y);
+  *screen_y = point->x;
+  return true;
+}
+
+static void GT1151_DemoDrawTouch(const GT1151_TouchData *touch)
+{
+  uint8_t i;
+
+  /* Clear only the live-data row; the drawing area is intentionally retained
+   * so a finger leaves a visible track across the panel. */
+  BSP_NT35510_FillRect(0, 64, 800, 32, BSP_NT35510_COLOR_BLACK);
+  BSP_NT35510_DrawString(8, 70, 88, 16, "POINTS:",
+                        BSP_NT35510_FONT_16, BSP_NT35510_COLOR_WHITE,
+                        BSP_NT35510_COLOR_BLACK, false);
+  BSP_NT35510_DrawUInt(96, 70, touch->count, 1,
+                      BSP_NT35510_FONT_16, BSP_NT35510_COLOR_CYAN,
+                      BSP_NT35510_COLOR_BLACK, false);
+
+  for (i = 0; i < touch->count; i++)
+  {
+    const GT1151_Point *point = &touch->points[i];
+    uint16_t text_x = (uint16_t)(150U + (uint16_t)i * 125U);
+
+    BSP_NT35510_DrawString(text_x, 70, 18, 16, "X",
+                          BSP_NT35510_FONT_16, BSP_NT35510_COLOR_WHITE,
+                          BSP_NT35510_COLOR_BLACK, false);
+    BSP_NT35510_DrawUInt((uint16_t)(text_x + 16U), 70, point->x, 3,
+                        BSP_NT35510_FONT_16, BSP_NT35510_COLOR_YELLOW,
+                        BSP_NT35510_COLOR_BLACK, false);
+    BSP_NT35510_DrawString((uint16_t)(text_x + 60U), 70, 18, 16, "Y",
+                          BSP_NT35510_FONT_16, BSP_NT35510_COLOR_WHITE,
+                          BSP_NT35510_COLOR_BLACK, false);
+    BSP_NT35510_DrawUInt((uint16_t)(text_x + 76U), 70, point->y, 3,
+                        BSP_NT35510_FONT_16, BSP_NT35510_COLOR_YELLOW,
+                        BSP_NT35510_COLOR_BLACK, false);
+
+    uint16_t screen_x;
+    uint16_t screen_y;
+
+    if (GT1151_MapToLandscape(point, &screen_x, &screen_y))
+    {
+      BSP_NT35510_DrawCircle(screen_x, screen_y, GT1151_MARK_RADIUS,
+                            BSP_NT35510_COLOR_RED);
+      BSP_NT35510_DrawCircle(screen_x, screen_y,
+                            (uint16_t)(GT1151_MARK_RADIUS - 3U),
+                            BSP_NT35510_COLOR_YELLOW);
+    }
+  }
+}
 
 /* USER CODE END 0 */
 
@@ -93,24 +208,29 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_FSMC_Init();
   /* USER CODE BEGIN 2 */
   lcd_init_status = BSP_NT35510_Init();
   lcd_test_id = BSP_NT35510_GetDeviceId();
   lcd_test_ready = BSP_NT35510_IsReady();
-  // if (lcd_test_ready)
-  // {
-  //   BSP_NT35510_DrawLine(0, 0, 440, 700, BSP_NT35510_COLOR_BLUE);
-  // }
+  (void)BSP_NT35510_SetOrientation(BSP_NT35510_ORIENTATION_LANDSCAPE);
+  BSP_NT35510_Clear(BSP_NT35510_COLOR_BLACK);
+
+  gt1151_init_status = BSP_GT1151_Init();
+  char gt1151_id[5] = "----";
+  if (gt1151_init_status != GT1151_ERROR)
+  {
+    (void)BSP_GT1151_ReadID(gt1151_id);
+  }
+  GT1151_DemoDrawHeader(gt1151_id);
   /* USER CODE END 2 */
 
-  /* Init scheduler */
-  osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
-  MX_FREERTOS_Init();
-
-  /* Start scheduler */
-  osKernelStart();
+  // /* Init scheduler */
+  // osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
+  // MX_FREERTOS_Init();
+  //
+  // /* Start scheduler */
+  // osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
 
@@ -121,6 +241,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    if (gt1151_init_status != GT1151_ERROR)
+    {
+      GT1151_TouchData touch;
+
+      if (BSP_GT1151_Scan(&touch) > 0U)
+      {
+        gt1151_touch_data = touch;
+        gt1151_frame_count++;
+        GT1151_DemoDrawTouch(&touch);
+      }
+    }
+
+    /* No RTOS is required: HAL_Delay uses the HAL time base (TIM6 here). */
+    HAL_Delay(5);
   }
   /* USER CODE END 3 */
 }
