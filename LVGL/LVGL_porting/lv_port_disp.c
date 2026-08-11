@@ -85,22 +85,22 @@ void lv_port_disp_init(void)
      */
 
     /* Example for 1) */
-    // static lv_disp_draw_buf_t draw_buf_dsc_1;
-    // static lv_color_t buf_1[MY_DISP_HOR_RES * 10];                             /*A buffer for 10 rows*/
-    // lv_disp_draw_buf_init(&draw_buf_dsc_1, buf_1, NULL, MY_DISP_HOR_RES * 10);   /*Initialize the display buffer*/
+    static lv_disp_draw_buf_t draw_buf_dsc_1;
+    static lv_color_t buf_1[MY_DISP_HOR_RES * 40] __attribute__((section(".ccmram")));                             /*A buffer for 10 rows*/
+    lv_disp_draw_buf_init(&draw_buf_dsc_1, buf_1, NULL, MY_DISP_HOR_RES * 40);   /*Initialize the display buffer*/
 
     // /* Example for 2) */
-    static lv_disp_draw_buf_t draw_buf_dsc_2;
-    /* Place both draw buffers in CCMRAM (64 KB, 0x10000000).
-     * Each buffer is MY_DISP_HOR_RES * 10 * sizeof(lv_color_t) = 800*10*2 = 16 000 B (~15.6 KB).
-     * Two buffers together use ~31.2 KB, well within the 64 KB CCMRAM.
-     *
-     * NOTE: STM32F4 DMA controllers cannot access CCMRAM (it is on the
-     * D-code bus only).  If DMA-based flushing is added later, move these
-     * buffers back to internal SRAM or external SRAM instead. */
-    static lv_color_t buf_2_1[MY_DISP_HOR_RES * 10] __attribute__((section(".ccmram")));
-    static lv_color_t buf_2_2[MY_DISP_HOR_RES * 10] __attribute__((section(".ccmram")));
-    lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2, MY_DISP_HOR_RES * 10);   /*Initialize the display buffer*/
+    // static lv_disp_draw_buf_t draw_buf_dsc_2;
+    // /* Place both draw buffers in CCMRAM (64 KB, 0x10000000).
+    //  * Each buffer is MY_DISP_HOR_RES * 10 * sizeof(lv_color_t) = 800*10*2 = 16 000 B (~15.6 KB).
+    //  * Two buffers together use ~31.2 KB, well within the 64 KB CCMRAM.
+    //  *
+    //  * NOTE: STM32F4 DMA controllers cannot access CCMRAM (it is on the
+    //  * D-code bus only).  If DMA-based flushing is added later, move these
+    //  * buffers back to internal SRAM or external SRAM instead. */
+    // static lv_color_t buf_2_1[MY_DISP_HOR_RES * 20] __attribute__((section(".ccmram")));
+    // static lv_color_t buf_2_2[MY_DISP_HOR_RES * 20] __attribute__((section(".ccmram")));
+    // lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2, MY_DISP_HOR_RES * 20);   /*Initialize the display buffer*/
 
     // /* Example for 3) also set disp_drv.full_refresh = 1 below*/
     // static lv_disp_draw_buf_t draw_buf_dsc_3;
@@ -126,7 +126,7 @@ void lv_port_disp_init(void)
     disp_drv.flush_cb = disp_flush;
 
     /*Set a display buffer*/
-    disp_drv.draw_buf = &draw_buf_dsc_2;
+    disp_drv.draw_buf = &draw_buf_dsc_1;
 
     /*Required for Example 3)*/
     //disp_drv.full_refresh = 1;
@@ -179,7 +179,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
         const int32_t width  = area->x2 - area->x1 + 1;
         const int32_t height = area->y2 - area->y1 + 1;
 
-        BSP_NT35510_WritePixels((uint16_t)area->x1, (uint16_t)area->y1,
+        BSP_NT35510_WritePixelsFast((uint16_t)area->x1, (uint16_t)area->y1,
                                 (uint16_t)width,    (uint16_t)height,
                                 (const uint16_t *)color_p);
     }

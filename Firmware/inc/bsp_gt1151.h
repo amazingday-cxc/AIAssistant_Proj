@@ -102,7 +102,7 @@ typedef struct
     uint8_t  track_id;    /* 触摸点跟踪 ID（区分不同手指）  */
     uint16_t x;           /* X 坐标（原始，未做方向变换）   */
     uint16_t y;           /* Y 坐标（原始，未做方向变换）   */
-    uint16_t size;        /* 触摸面积/压力                  */
+    uint16_t size;        /* 触摸面积                   */
 } GT1151_Point;
 
 /** 一次扫描得到的全部触摸点 */

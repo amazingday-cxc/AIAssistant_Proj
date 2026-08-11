@@ -6,6 +6,8 @@
 #ifndef GUI_APP_H
 #define GUI_APP_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -17,11 +19,13 @@ extern "C" {
 void gui_app_init(void);
 
 /**
- * FreeRTOS task body: runs gui_app_init() then periodically services
- * lv_timer_handler(). Hand this straight to osThreadNew().
- * @param argument unused (CMSIS-RTOS v2 signature).
+ * Service LVGL timers and input/display processing once.
+ * Call periodically and only from the GUI task after gui_app_init().
+ *
+ * @return Recommended delay in milliseconds before the next call. The return
+ *         value is bounded so the GUI task continues to service LVGL often.
  */
-void gui_task(void *argument);
+uint32_t gui_app_process(void);
 
 #ifdef __cplusplus
 }

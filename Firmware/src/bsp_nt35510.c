@@ -942,6 +942,56 @@ bool BSP_NT35510_PreparePixelWrite(uint16_t x, uint16_t y,
 }
 
 /**
+ * @brief  Blit an in-bounds RGB565 pixel buffer without clipping.
+ * @param  x       Left edge in pixels (assumed in range).
+ * @param  y       Top edge in pixels (assumed in range).
+ * @param  width   Region width in pixels.
+ * @param  height  Region height in pixels.
+ * @param  pixels  Pointer to width*height RGB565 pixels in row-major order.
+ * @note   Intended for LVGL flush buffers whose area is already clipped. The
+ *         transfer loop writes eight pixels per iteration to the fixed FSMC
+ *         data address for maximum throughput.
+ * @return true if the region was drawn; false on invalid arguments.
+ */
+bool BSP_NT35510_WritePixelsFast(uint16_t x, uint16_t y,
+                                  uint16_t width, uint16_t height,
+                                  const uint16_t *pixels)
+{
+    volatile uint16_t *const lcd_data =
+        (volatile uint16_t *)BSP_NT35510_DATA_ADDRESS;
+    uint32_t pixel_count = (uint32_t)width * height;
+
+    if (!nt35510_state.ready || pixels == NULL || pixel_count == 0U)
+    {
+        return false;
+    }
+
+    nt35510_set_address_window(x, y, width, height);
+    nt35510_begin_memory_write();
+
+    while (pixel_count >= 8U)
+    {
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        *lcd_data = *pixels++;
+        pixel_count -= 8U;
+    }
+
+    while (pixel_count != 0U)
+    {
+        *lcd_data = *pixels++;
+        --pixel_count;
+    }
+
+    return true;
+}
+
+/**
  * @brief  Blit a RGB565 pixel buffer into a rectangular screen region.
  * @param  x       Left edge in pixels.
  * @param  y       Top edge in pixels.

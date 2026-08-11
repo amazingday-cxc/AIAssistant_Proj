@@ -114,7 +114,7 @@
     /*Allow buffering some shadow calculation.
     *LV_SHADOW_CACHE_SIZE is the max. shadow size to buffer, where shadow size is `shadow_width + radius`
     *Caching has LV_SHADOW_CACHE_SIZE^2 RAM cost*/
-    #define LV_SHADOW_CACHE_SIZE 0
+    #define LV_SHADOW_CACHE_SIZE 64
 
     /* Set number of maximally cached circle data.
     * The circumference of 1/4 circle are saved for anti-aliasing
@@ -279,14 +279,14 @@
  *-----------*/
 
 /*1: Show CPU usage and FPS count*/
-#define LV_USE_PERF_MONITOR 1
+#define LV_USE_PERF_MONITOR 0
 #if LV_USE_PERF_MONITOR
     #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 #endif
 
 /*1: Show the used memory and the memory fragmentation
  * Requires LV_MEM_CUSTOM = 0*/
-#define LV_USE_MEM_MONITOR 1
+#define LV_USE_MEM_MONITOR 0
 #if LV_USE_MEM_MONITOR
     #define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
 #endif
@@ -580,10 +580,10 @@
     #define LV_THEME_DEFAULT_DARK 0
 
     /*1: Enable grow on press*/
-    #define LV_THEME_DEFAULT_GROW 1
+    #define LV_THEME_DEFAULT_GROW 0
 
     /*Default transition time in [ms]*/
-    #define LV_THEME_DEFAULT_TRANSITION_TIME 80
+    #define LV_THEME_DEFAULT_TRANSITION_TIME 64
 #endif /*LV_USE_THEME_DEFAULT*/
 
 /*A very simple theme that is a good starting point for a custom theme*/

@@ -1,0 +1,40 @@
+# GDB batch commands for SWD debug session
+set pagination off
+set confirm off
+
+# Connect to ST-LINK GDB server
+target extended-remote localhost:61234
+
+echo \n===== Connected. Halting target =====\n
+monitor halt
+
+echo \n===== CPU Registers =====\n
+info registers
+
+echo \n===== Program Counter symbol =====\n
+info symbol $pc
+
+echo \n===== Read RCC_CR (0x40023800) =====\n
+x/1xw 0x40023800
+
+echo \n===== Read GPIOA base (0x40020000) =====\n
+x/4xw 0x40020000
+
+echo \n===== Backtrace =====\n
+bt
+
+echo \n===== Set breakpoint at main and reset =====\n
+break main
+monitor reset
+
+echo \n===== Continue to main =====\n
+continue
+
+echo \n===== Stopped. Current location =====\n
+info registers pc
+info symbol $pc
+bt
+
+echo \n===== Detach =====\n
+detach
+quit

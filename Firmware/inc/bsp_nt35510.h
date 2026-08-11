@@ -79,6 +79,9 @@ void BSP_NT35510_FillRect(uint16_t x, uint16_t y,
                           uint16_t width, uint16_t height, uint16_t color);
 bool BSP_NT35510_PreparePixelWrite(uint16_t x, uint16_t y,
                             uint16_t width, uint16_t height);
+bool BSP_NT35510_WritePixelsFast(uint16_t x, uint16_t y,
+                             uint16_t width, uint16_t height,
+                             const uint16_t *pixels);
 bool BSP_NT35510_WritePixels(uint16_t x, uint16_t y,
                              uint16_t width, uint16_t height,
                              const uint16_t *pixels);

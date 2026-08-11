@@ -1,3 +1,4 @@
-/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:31:13:apply_btn_shadow	8	static
-/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:119:6:gui_app_init	24	static
-/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:128:6:guiTask_Func	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:43:13:volume_popup_result_cb	8	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:61:13:volume_btn_clicked_cb	16	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:241:6:gui_app_init	32	static
+/media/xiucong/3A7D61EB7DF8AB6B/Ubuntu_Proj/ARM_Proj/AIAssistant_Proj/LVGL/LVGL_myGUI/gui_app.c:250:6:guiTask_Func	8	static

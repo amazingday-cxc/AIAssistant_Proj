@@ -25,6 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "bsp_gt1151.h"
+#include "bsp_nt35510.h"
 #include "gui_app.h"
 /* USER CODE END Includes */
 
@@ -45,7 +47,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-__attribute__((section(".ccmram"))) static uint8_t my_buf[4096];
+// __attribute__((section(".ccmram"))) static uint8_t my_buf[4096];
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -125,6 +127,7 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+  (void)argument;
   /* Infinite loop */
   for(;;)
   {
@@ -140,6 +143,12 @@ void StartDefaultTask(void *argument)
     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
     vTaskDelay(750);
+  //   BSP_GT1151_Scan(&torch);
+  //   BSP_NT35510_DrawUInt(0, 0, torch.points[0].x, 4, 24,
+  //     BSP_NT35510_COLOR_RED, BSP_NT35510_COLOR_WHITE, 1);
+  //   BSP_NT35510_DrawUInt(40, 40, torch.points[0].y, 4, 24,
+  // BSP_NT35510_COLOR_RED, BSP_NT35510_COLOR_WHITE, 1);
+  //   vTaskDelay(50);
   }
   /* USER CODE END StartDefaultTask */
 }
@@ -151,16 +160,18 @@ void StartDefaultTask(void *argument)
 * @retval None
 */
 /* USER CODE END Header_guiTask_Func */
-// void guiTask_Func(void *argument)
-// {
-//   /* USER CODE BEGIN guiTask_Func */
-//     /* Infinite loop */
-//     for(;;)
-//     {
-//       osDelay(1);
-//     }
-//   /* USER CODE END guiTask_Func */
-// }
+void guiTask_Func(void *argument)
+{
+  /* USER CODE BEGIN guiTask_Func */
+  (void)argument;
+  gui_app_init();
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(gui_app_process());
+  }
+  /* USER CODE END guiTask_Func */
+}
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
