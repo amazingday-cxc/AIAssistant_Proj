@@ -48,6 +48,11 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+        App/Inc/device_cloud.h
+        App/Inc/device_cloud_config.h
+        App/Inc/esp32s3_link.h
+        App/Src/device_cloud.c
+        App/Src/esp32s3_link.c
         Firmware/inc/bsp_nt35510.h
         Firmware/src/bsp_nt35510.c
         Firmware/src/bsp_nt35510_font.c
@@ -58,6 +63,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/App/Inc
     ${CMAKE_CURRENT_SOURCE_DIR}/Firmware/inc
 )
 

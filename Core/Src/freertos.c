@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "bsp_gt1151.h"
 #include "bsp_nt35510.h"
+#include "device_cloud.h"
 #include "gui_app.h"
 /* USER CODE END Includes */
 
@@ -63,6 +64,13 @@ const osThreadAttr_t guiTask_attributes = {
   .stack_size = 1024 * 4,
   .priority = (osPriority_t) osPriorityRealtime,
 };
+/* Definitions for cloudTask */
+osThreadId_t cloudTaskHandle;
+const osThreadAttr_t cloudTask_attributes = {
+  .name = "cloudTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityBelowNormal,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -71,6 +79,7 @@ const osThreadAttr_t guiTask_attributes = {
 
 void StartDefaultTask(void *argument);
 void guiTask_Func(void *argument);
+void cloudTask_Func(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -81,7 +90,7 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-
+  DeviceCloud_Init();
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -106,6 +115,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of guiTask */
   guiTaskHandle = osThreadNew(guiTask_Func, NULL, &guiTask_attributes);
+
+  /* creation of cloudTask */
+  cloudTaskHandle = osThreadNew(cloudTask_Func, NULL, &cloudTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
 
@@ -171,6 +183,20 @@ void guiTask_Func(void *argument)
     osDelay(gui_app_process());
   }
   /* USER CODE END guiTask_Func */
+}
+
+/* USER CODE BEGIN Header_cloudTask_Func */
+/**
+* @brief Function implementing the cloudTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_cloudTask_Func */
+void cloudTask_Func(void *argument)
+{
+  /* USER CODE BEGIN cloudTask_Func */
+  DeviceCloud_Task(argument);
+  /* USER CODE END cloudTask_Func */
 }
 
 /* Private application code --------------------------------------------------*/

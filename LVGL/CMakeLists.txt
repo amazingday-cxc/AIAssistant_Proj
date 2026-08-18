@@ -42,6 +42,7 @@ target_include_directories(lvgl PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/LVGL_src   # internal cross-includes
     ${CMAKE_CURRENT_SOURCE_DIR}/LVGL_porting
     ${CMAKE_CURRENT_SOURCE_DIR}/LVGL_myGUI
+    ${CMAKE_CURRENT_SOURCE_DIR}/../App/Inc       # device/cloud application API
     ${CMAKE_CURRENT_SOURCE_DIR}/../Firmware/inc  # BSP drivers (NT35510, etc.)
 )
 
